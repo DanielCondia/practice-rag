@@ -1,0 +1,7 @@
+from langchain_google_genai import GoogleGenerativeAI
+from getpass import getpass
+
+api_key = getpass("Enter your API key: ")
+
+llm = GoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=api_key)
+print(llm.invoke("What are some of the pros and cons of Python as a programming language?"))
