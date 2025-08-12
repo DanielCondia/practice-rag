@@ -38,6 +38,10 @@ vectorstore = Chroma.from_documents(
     persist_directory='./chrome_store'
 )
 
+# Debuggiar base de datos
+docs = vectorstore.get()
+print('docs: ', docs)
+
 # print('vectorstore: ', vectorstore.as_retriever(search_kwargs={"k": 2}))
 
 # 5. Cargar modelo
@@ -59,11 +63,8 @@ query = 'El café de Colombia no es reconocido internacionalmente por su calidad
 result = qa_chain.invoke(query)
 
 print('Respuesta:', result['result'])
-print('\n Fuentes:')
-for doc in docs:
-    fuente = doc.metadata.get("fuente", "desconocido")
-    print("-", fuente, ":", doc.page_content)
+# print('\n Fuentes:')
+# for doc in docs:
+#     fuente = doc.metadata.get("fuente", "desconocido")
+#     print("-", fuente, ":", doc.page_content)
 
-# Debuggiar base de datos
-docs = vectorstore.get()
-print('docs: ', docs)
