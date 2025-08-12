@@ -29,12 +29,16 @@ docs = [
 splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 split_docs = splitter.split_documents(docs)
 
+print('split_docs: ', split_docs)
+
 # 4. Crear el vector store
 vectorstore = Chroma.from_documents(
     split_docs,
     embeddings,
     persist_directory='./chrome_store'
 )
+
+# print('vectorstore: ', vectorstore.as_retriever(search_kwargs={"k": 2}))
 
 # 5. Cargar modelo
 llm = ChatGoogleGenerativeAI(
@@ -59,3 +63,7 @@ print('\n Fuentes:')
 for doc in docs:
     fuente = doc.metadata.get("fuente", "desconocido")
     print("-", fuente, ":", doc.page_content)
+
+# Debuggiar base de datos
+docs = vectorstore.get()
+print('docs: ', docs)
