@@ -52,7 +52,7 @@ retriever = vectordb.as_retriever(search_type='similarity', search_kwargs={'k': 
 
 qa_chain = (
     {
-        'context': vectordb.as_retriever(),
+        'context': retriever,
         'question': RunnablePassthrough()
     }
     | prompt
